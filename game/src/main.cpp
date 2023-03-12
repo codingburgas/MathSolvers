@@ -1,29 +1,35 @@
-#include "raylib.h"
 #include <iostream>
+#include "menu.h"
+#include "raylib.h"
 
-int main()
-{
-    const int screenWidth = 1000;
-    const int screenHeight = 500;
-    InitWindow(screenWidth, screenHeight, "MathSolvers - GAME");
-    
-    Rectangle btnBounds = {100, 200, 100, 200};
-    Color rectangeColor = BLUE;
-    SetTargetFPS(60);               
-    // Main game loop
-    while (!WindowShouldClose())  
-    {   
-        if (CheckCollisionPointRec(GetMousePosition(),btnBounds)){
-            rectangeColor = ORANGE;
-        } else {
-            rectangeColor = BLUE;
-        }
-        
+using namespace std;
+
+int main(){
+    SceneType currentScene = MAIN_MENU;
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    InitWindow(screenWidth, screenHeight, "Math Solvers - Game");
+
+    while (!WindowShouldClose())
+    {
         BeginDrawing();
-            DrawText("The Game",300 , 200, 30, BLUE); 
-            ClearBackground(RAYWHITE);
-            DrawRectangle(0, 0, 100, 200, rectangeColor);
+        ClearBackground(WHITE);
+
+        switch (currentScene)
+        {
+        case MAIN_MENU:
+            mainMenu(currentScene);
+            break;
+        case SECOND_MENU:
+            secondMenu(currentScene);
+            break;
+        
+        case ABOUT_MENU:
+            aboutMenu(currentScene);
+            break;
+        }
         EndDrawing();
     }
-    return 0;
+    
+    CloseWindow();
 }
