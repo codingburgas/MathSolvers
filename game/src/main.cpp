@@ -27,6 +27,9 @@ int main(){
         case ABOUT_MENU:
             aboutMenu(currentScene);
             break;
+        case GAME_MENU:
+            game(currentScene);
+            break;
         }
         EndDrawing();
     }

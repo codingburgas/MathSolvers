@@ -97,7 +97,9 @@ void secondMenu(SceneType& sceneState){
 
         if (CheckCollisionPointRec(GetMousePosition(),menu_game)){
             rectangeColor = ORANGE;
-            
+            if (nextScene){
+                sceneState = GAME_MENU;
+            }
         } else {
             rectangeColor = BLUE;
         }
@@ -122,7 +124,7 @@ void secondMenu(SceneType& sceneState){
         }
     }
 void aboutMenu(SceneType& sceneState){
-    Texture2D first_pic = LoadTexture("./game/mat/frames/button1.png");
+    Texture2D first_pic = LoadTexture("../game/mat/frames/button1.png");
     // button
     Rectangle menu_back = { GetScreenWidth() / 2 - 200, GetScreenHeight() / 2 + 325, 400, 100 };
     //color for the button
@@ -155,3 +157,70 @@ void aboutMenu(SceneType& sceneState){
     
 
     }
+void game(SceneType& sceneState){
+
+    //positions
+    Rectangle rec_lines = {300, 1080 - 200, 100,100};
+    Rectangle rec_lines1 = {300, 1080 - 200, 100,100};
+    Vector2 startPos = {300, 870};
+    Vector2 endPos = {1175, 870};
+    //structure 
+    DrawRectangle(100, 100, 1300, 1000, SKYBLUE);
+    DrawRectangleRec(rec_lines, WHITE);
+    DrawRectangleLinesEx(rec_lines,3.0f, BLACK);    
+    //rectangles
+    Rectangle rec_pos = {300, 1080 - 330, 100,100};
+    //color of the buttons
+
+    Color buttonColor1 = WHITE;
+    Color buttonColor2 = WHITE;
+    Color buttonColor3 = WHITE;
+    Color buttonColor4 = WHITE;
+    Color buttonColor5 = WHITE;
+    Color buttonColor6 = WHITE;
+    Color buttonColor7 = WHITE;
+    Color buttonColor8 = WHITE;
+
+    for (int i = 0; i < 7; i++){
+        rec_lines.x += 110;
+        DrawRectangleRec(rec_lines, WHITE);
+        DrawRectangleLinesEx(rec_lines,3.0f, BLACK);
+    }
+    DrawText("128",350, 1080 - 175, 30, BLACK);
+    DrawText("64",460, 1080 - 175, 30, BLACK);
+    DrawText("32",570, 1080 - 175, 30, BLACK);
+    DrawText("16",680, 1080 - 175, 30, BLACK);
+    DrawText("8",790, 1080 - 175, 30, BLACK);
+    DrawText("4",900, 1080 - 175, 30, BLACK);
+    DrawText("2",1010, 1080 - 175, 30, BLACK);
+    DrawText("1",1120, 1080 - 175, 30, BLACK);
+    DrawLineBezier(startPos, endPos, 5.0f, BLACK);
+
+    const char *button_text = "0";
+    //the buttons
+    DrawRectangle(410, 1080 - 330, 100,100, buttonColor2);
+    DrawRectangle(520, 1080 - 330, 100,100, buttonColor3);
+    DrawRectangle(630, 1080 - 330, 100,100, buttonColor4);
+    DrawRectangle(740, 1080 - 330, 100,100, buttonColor5);
+    DrawRectangle(850, 1080 - 330, 100,100, buttonColor6);
+    DrawRectangle(960, 1080 - 330, 100,100, buttonColor7);
+    DrawRectangle(1070, 1080 - 330, 100,100,buttonColor8);
+
+    if (CheckCollisionPointRec(GetMousePosition(),rec_pos)){
+        button_text = "0";
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+            button_text = "1";
+            buttonColor1 = ORANGE;
+        }
+
+    }
+    else {
+        button_text = "0";
+    }
+    DrawRectangle(300, 1080 - 330, 100,100, buttonColor1);
+    DrawText(button_text,350, 1080 - 300, 30, BLACK);
+
+
+    
+
+}
