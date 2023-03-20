@@ -5,6 +5,8 @@
 using namespace std;
 
 int main(){
+    Color background_color = {100,10,10};
+
     SceneType currentScene = MAIN_MENU;
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
@@ -35,4 +37,4 @@ int main(){
     }
     
     CloseWindow();
-}
+};
