@@ -3,10 +3,10 @@
 #include <iostream>
 #include "raylib.h"
 
-
 enum SceneType
 {
     LOGIN_MENU,
+    REGISTER_MENU,
     MAIN_MENU,
     SECOND_MENU,
     ABOUT_MENU,

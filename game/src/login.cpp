@@ -1,15 +1,25 @@
+
 #include "login.h"
-#include <iostream>
 #include <fstream>
 #include <string.h>
+#include <iostream>
 #include "raylib.h"
-#include "main.h"
-using namespace std;
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
 
-void login(bool* UserBoxEditMode ,char* UserBoxInput,bool* PassBoxEditMode ,char* PassBoxInput,int count, string userId, string password,string id, string pass){
-    DrawRectangle(100, 100, 100, 100, GRAY);
-    if (GuiTextBox((Rectangle){ 480, 216, 120, 24 }, UserBoxInput, 128, UserBoxEditMode)) UserBoxEditMode = !UserBoxEditMode;
-    if (GuiTextBox((Rectangle){ 480, 216, 120, 24 }, PassBoxInput, 128, PassBoxEditMode)) PassBoxEditMode = !PassBoxEditMode;
+
+void login(SceneType& sceneState, bool* UserBoxEditMode ,char* UserBoxInput,bool* PassBoxEditMode, char* PassBoxInput){
+    string userId, password, id, pass;
+    int count;
+    
+    DrawRectangle(622,140,700,800, GRAY);
+    DrawText("LOGIN", 895,246,50, WHITE);
+    DrawRectangle(722,602, 500, 90, GREEN);
+    DrawText("ENTER", 891,620,50, WHITE);
+    DrawText("Don't you have an account?", 841,715,20, WHITE);
+
+    if (GuiTextBox((Rectangle){ 722, 373, 500, 80 }, UserBoxInput, 128, UserBoxEditMode)) UserBoxEditMode = !UserBoxEditMode;
+    if (GuiTextBox((Rectangle){ 722, 478, 500, 80 }, PassBoxInput, 128, PassBoxEditMode)) PassBoxEditMode = !PassBoxEditMode;
     
     userId = UserBoxInput;
     password = PassBoxInput;
@@ -23,22 +33,31 @@ void login(bool* UserBoxEditMode ,char* UserBoxInput,bool* PassBoxEditMode ,char
     }
     input.close();
     if (count == 1){
-        CloseWindow();
+        if(CheckCollisionPointRec(GetMousePosition(),(Rectangle){722,602, 500, 90})){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                sceneState = MAIN_MENU;
+            }
+        }
     } else {
-        DrawText("Try Again", 130, 100, 20, BLACK);
-        login();
+        DrawText("Try Again", 881, 853, 30, RED);
     }
 }
-void reg(bool* RUserBoxEditMode ,char* RUserBoxInput,bool* RPassBoxEditMode ,char* RPassBoxInput,string ruserId, string rpassword, string rid, string rpass){
-    DrawRectangle(100, 100, 100, 100,GRAY );
+void reg(SceneType& sceneState,bool* RUserBoxEditMode ,char* RUserBoxInput,bool* RPassBoxEditMode ,char* RPassBoxInput){
+    string ruserId, rpassword, rid, rpass;
+    
+    DrawRectangle(622,140,700,800, GRAY);
+    DrawText("REGISTER", 852,246,50, WHITE);
+    DrawRectangle(722,602, 500, 90, GREEN);
+    DrawText("CREATE", 877,620,50, WHITE);
 
-    if (GuiTextBox((Rectangle){ 480, 216, 120, 24 }, RUserBoxInput, 128, RUserBoxEditMode)) RUserBoxEditMode = !RUserBoxEditMode;
-    if (GuiTextBox((Rectangle){ 480, 216, 120, 24 }, RPassBoxInput, 128, RPassBoxEditMode)) RPassBoxEditMode = !RPassBoxEditMode;
+    if (GuiTextBox((Rectangle){ 722, 373, 500, 80 }, RUserBoxInput, 128, RUserBoxEditMode)) RUserBoxEditMode = !RUserBoxEditMode;
+    if (GuiTextBox((Rectangle){ 722, 478, 500, 80 }, RPassBoxInput, 128, RPassBoxEditMode)) RPassBoxEditMode = !RPassBoxEditMode;
 
     ruserId = RUserBoxInput;
     rpassword = RPassBoxInput;
 
     ofstream f1("register.txt", ios::app);
     f1 << ruserId << ' ' << rpassword << endl;
-    login();
+    WaitTime(2);
+    sceneState = LOGIN_MENU;
 }

@@ -1,11 +1,11 @@
-#include "login.h"
-#include <iostream>
+#include "main.h"
 #include "menu.h"
 #include "raylib.h"
 
 using namespace std;
 
 int main(){
+
     // login data base
     char UserBoxInput[128] = "Username";
     char PassBoxInput[128] = "Password";
@@ -16,12 +16,11 @@ int main(){
     char RPassBoxInput[128] = "Password";
     bool RPassBoxEditMode = false;
     bool RUserBoxEditMode = false;
-    //current menu of login
-    LoginType userInput = LOGIN;
+
     //background color
     Color background_color = {100,10,10};
 
-    SceneType currentScene = MAIN_MENU;
+    SceneType currentScene = LOGIN_MENU;
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
     InitWindow(screenWidth, screenHeight, "Math Solvers - Game");
@@ -60,7 +59,7 @@ int main(){
     }
     if (value7 == 1){
         sum += 1;
-    }
+    } 
     
     while (!WindowShouldClose())
     {
@@ -70,17 +69,10 @@ int main(){
         switch (currentScene)
         {
         case LOGIN_MENU:
-            switch (userInput)
-            {
-                case LOGIN:
-                    login(bool* UserBoxEditMode ,char* UserBoxInput,bool* PassBoxEditMode ,char* PassBoxInput,int count, string userId,password,id,pass);
-                    break;
-                case REG:
-                    reg(bool* RUserBoxEditMode ,char* RUserBoxInput,bool* RPassBoxEditMode ,char* RPassBoxInput,string ruserId, string rpassword, string rid, string rpass);
-                    break;
-                case GUEST:
-                    break;
-            }
+            login(SceneType& sceneState, bool* UserBoxEditMode ,char* UserBoxInput,bool* PassBoxEditMode, char* PassBoxInput);
+            break;
+        case REGISTER_MENU:
+            reg(SceneType& sceneState,bool* RUserBoxEditMode ,char* RUserBoxInput,bool* RPassBoxEditMode ,char* RPassBoxInput);
             break;
         case MAIN_MENU:
             mainMenu(currentScene);
