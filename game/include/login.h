@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include "raylib.h"
+#include "menu.h"
+#include "main.h"
 
 
 void login(SceneType& sceneState, bool* UserBoxEditMode ,char* UserBoxInput,bool* PassBoxEditMode, char* PassBoxInput);

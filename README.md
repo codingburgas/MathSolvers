@@ -7,9 +7,9 @@
 ## 🧒 Our Team
 
 <b>
-<a href = “https://github.com/SMMishev21> 🟦🟨 Stilian Mishev [ Scrum Trainer and QA Developer ] </a><br>
-<a href=“https://github.com/DKByandov21”> 🟥🟩 Dimitar Byandov [ Fronted and Backend Developer] </a><br>
-<a href=“https://github.com/INTsvyatkov211”> 🟥🟩 Ivan Tsvyatkov [ Fronted and Backend Developer ] </a><br>
+<a href = “https://github.com/SMMishev21> 🟦 Stilian Mishev [ Scrum Trainer ] </a><br>
+<a href=“https://github.com/DKByandov21”> 🟥🟩 Dimitar Byandov [ Frontend and Backend Developer] </a><br>
+<a href=“https://github.com/INTsvyatkov211”> 🟨 Ivan Tsvyatkov [ QA Developer ] </a><br>
 </b>
 
 ## 💻 About

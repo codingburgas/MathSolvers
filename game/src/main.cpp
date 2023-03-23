@@ -1,6 +1,7 @@
 #include "main.h"
 #include "menu.h"
 #include "raylib.h"
+#include "login.h"
 
 using namespace std;
 
@@ -69,10 +70,10 @@ int main(){
         switch (currentScene)
         {
         case LOGIN_MENU:
-            login(SceneType& sceneState, bool* UserBoxEditMode ,char* UserBoxInput,bool* PassBoxEditMode, char* PassBoxInput);
+            login(currentScene, &UserBoxEditMode ,UserBoxInput,&PassBoxEditMode, PassBoxInput);
             break;
         case REGISTER_MENU:
-            reg(SceneType& sceneState,bool* RUserBoxEditMode ,char* RUserBoxInput,bool* RPassBoxEditMode ,char* RPassBoxInput);
+            reg(currentScene,&RUserBoxEditMode, RUserBoxInput,&RPassBoxEditMode ,RPassBoxInput);
             break;
         case MAIN_MENU:
             mainMenu(currentScene);
