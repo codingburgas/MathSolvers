@@ -1,3 +1,4 @@
+#include "login.h"
 #include <iostream>
 #include "menu.h"
 #include "raylib.h"
@@ -5,13 +6,25 @@
 using namespace std;
 
 int main(){
+    // login data base
+    char UserBoxInput[128] = "Username";
+    char PassBoxInput[128] = "Password";
+    bool PassBoxEditMode = false;
+    bool UserBoxEditMode = false;
+    // register date base
+    char RUserBoxInput[128] = "Username";
+    char RPassBoxInput[128] = "Password";
+    bool RPassBoxEditMode = false;
+    bool RUserBoxEditMode = false;
+    //current menu of login
+    LoginType userInput = LOGIN;
+    //background color
     Color background_color = {100,10,10};
 
     SceneType currentScene = MAIN_MENU;
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
     InitWindow(screenWidth, screenHeight, "Math Solvers - Game");
-
     bool SpinnerEditMode = false;
     int SpinnerValue = 0;
     int sum = 0;
@@ -53,9 +66,22 @@ int main(){
     {
         BeginDrawing();
         ClearBackground(WHITE);
-
+        
         switch (currentScene)
         {
+        case LOGIN_MENU:
+            switch (userInput)
+            {
+                case LOGIN:
+                    login(bool* UserBoxEditMode ,char* UserBoxInput,bool* PassBoxEditMode ,char* PassBoxInput,int count, string userId,password,id,pass);
+                    break;
+                case REG:
+                    reg(bool* RUserBoxEditMode ,char* RUserBoxInput,bool* RPassBoxEditMode ,char* RPassBoxInput,string ruserId, string rpassword, string rid, string rpass);
+                    break;
+                case GUEST:
+                    break;
+            }
+            break;
         case MAIN_MENU:
             mainMenu(currentScene);
             break;
@@ -69,8 +95,12 @@ int main(){
         case GAME_MENU:
             game(currentScene,&SpinnerEditMode,&SpinnerValue, value,value1,value2,value3,value4,value5,value6,value7,&sum);
             break;
+        } 
+        if (SpinnerValue == sum){
+            
         }
         EndDrawing();
+       
     }
     
     CloseWindow();
