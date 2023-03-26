@@ -7,6 +7,10 @@
 #include "raygui.h"
 using namespace std;
 
+void levelbar(){
+    DrawRectangle(1382,55,500,80 ,WHITE);
+    DrawRectangle(1382,55,100,80 ,RED);
+}
 
 void game(SceneType& sceneState, bool* SpinnerEditMode,int* SpinnerValue, int value,int value1, int value2, int value3, int value4, int value5, int value6,int value7,int* sum){
 
@@ -46,9 +50,11 @@ void game(SceneType& sceneState, bool* SpinnerEditMode,int* SpinnerValue, int va
     DrawLineBezier(startPos, endPos, 5.0f, WHITE);
     GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
     GuiSetStyle(DEFAULT, BORDER_COLOR_NORMAL, 0x904a888a );
+
     if (GuiSpinner((Rectangle){ 1200, 1080- 300, 120, 60 }, "", SpinnerValue, 0, 255, *SpinnerEditMode)) {
         *SpinnerEditMode = !*SpinnerEditMode;
     }
+
 
 
     GuiValueBox(Rectangle {300, 1080-310, 80,80}, "", &value, 0, 1, false);
@@ -60,7 +66,7 @@ void game(SceneType& sceneState, bool* SpinnerEditMode,int* SpinnerValue, int va
     GuiValueBox(Rectangle {960, 1080-310, 80,80}, "", &value6, 0, 1, false);
     GuiValueBox(Rectangle {1070, 1080-310, 80,80}, "", &value7, 0, 1, false);
     
-    
+    levelbar();
 
     
     
@@ -74,14 +80,22 @@ void login(SceneType& sceneState, bool* UserBoxEditMode ,bool* PassBoxEditMode,c
     DrawText("LOGIN", 895,246,50, WHITE);
     DrawRectangle(722,602, 500, 90, GREEN);
     DrawText("ENTER", 891,620,50, WHITE);
+    DrawRectangleLines(841,715,300,20, GRAY);
     DrawText("Don't you have an account?", 841,715,20, WHITE);
 
-
-    if (GuiTextBox((Rectangle){ 722, 373, 500, 80 }, UserBoxInput, 128, UserBoxEditMode)){
-            *UserBoxEditMode = !*UserBoxEditMode
+    DrawRectangle(722, 373, 500, 80, WHITE);
+    DrawRectangle(722, 478, 500, 80, WHITE);    
+    if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){841,715,300,20})){
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+            sceneState = REGISTER_MENU;
+        }
+        
+    }
+    if (GuiTextBox((Rectangle){ 722, 373, 500, 80 }, UserBoxInput, 128, *UserBoxEditMode)){
+            *UserBoxEditMode = !*UserBoxEditMode;
     }
 
-    else if (GuiTextBox((Rectangle){ 722, 478, 500, 80 }, PassBoxInput, 128, PassBoxEditMode)) {
+    if (GuiTextBox((Rectangle){ 722, 478, 500, 80 }, PassBoxInput, 128, *PassBoxEditMode)){
             *PassBoxEditMode = !*PassBoxEditMode;
         
     }
@@ -94,7 +108,13 @@ void login(SceneType& sceneState, bool* UserBoxEditMode ,bool* PassBoxEditMode,c
     getline(read, pass);
     
     if(id == userId && pass == password){
-        count = 1;
+        if(userId == "" or password == ""){
+            count = 0;
+        } else{
+            count = 1;
+        }
+    
+        
     }
     else {
         count = 0;
@@ -114,9 +134,12 @@ void reg(SceneType& sceneState,bool* RUserBoxEditMode ,bool* RPassBoxEditMode,ch
     DrawText("REGISTER", 852,246,50, WHITE);
     DrawRectangle(722,602, 500, 90, GREEN);
     DrawText("CREATE", 877,620,50, WHITE);
-
-    if (GuiTextBox((Rectangle){ 722, 373, 500, 80 }, RUserBoxInput, 128, RUserBoxEditMode)) *RUserBoxEditMode = !*RUserBoxEditMode;
-    if (GuiTextBox((Rectangle){ 722, 478, 500, 80 }, RPassBoxInput, 128, RPassBoxEditMode)) *RPassBoxEditMode = !*RPassBoxEditMode;
+    
+    DrawRectangle(722, 373, 500, 80, WHITE);
+    DrawRectangle(722, 478, 500, 80, WHITE);
+    
+    if (GuiTextBox((Rectangle){ 722, 373, 500, 80 }, RUserBoxInput, 128, *RUserBoxEditMode)) *RUserBoxEditMode = !*RUserBoxEditMode;
+    if (GuiTextBox((Rectangle){ 722, 478, 500, 80 }, RPassBoxInput, 128, *RPassBoxEditMode)) *RPassBoxEditMode = !*RPassBoxEditMode;
 
     userId = RUserBoxInput;
     password = RPassBoxInput;

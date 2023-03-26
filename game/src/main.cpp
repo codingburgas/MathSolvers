@@ -9,27 +9,26 @@ using namespace std;
 
 int main(){
     
-
-    // login data base
-    char UserBoxInput[128] = "";
-    char PassBoxInput[128] = "";
-    bool PassBoxEditMode = false;
-    bool UserBoxEditMode = false;
-    // register date base
-    char RUserBoxInput[128] = "";
-    char RPassBoxInput[128] = "";
-    bool RPassBoxEditMode = false;
-    bool RUserBoxEditMode = false;
-
-    //background color
-    Color background_color = {100,10,10};
-
-    SceneType currentScene = REGISTER_MENU;
+    SceneType currentScene = LOGIN_MENU;
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
     InitWindow(screenWidth, screenHeight, "Math Solvers - Game");
+    //
     bool SpinnerEditMode = false;
     int SpinnerValue = 0;
+    // login data base
+    
+    bool UserBoxEditMode = false;
+    char UserBoxInput[128] = "";
+    bool PassBoxEditMode = false; 
+    char PassBoxInput[128] = "";
+
+    // register date base
+    bool RPassBoxEditMode = false;
+    char RPassBoxInput[128] = "";
+    bool RUserBoxEditMode = false;
+    char RUserBoxInput[128] = "";
+
     int sum = 0;
     int value = GetRandomValue(0,1);
     int value1 = GetRandomValue(0,1);
@@ -65,10 +64,12 @@ int main(){
         sum += 1;
     } 
     
+    Texture2D background_color = LoadTexture("../img/frames/background.png");
+
     while (!WindowShouldClose())
     {
         BeginDrawing();
-        ClearBackground(WHITE);
+        DrawTexture(background_color,0,0,WHITE);
         
         switch (currentScene)
         {
@@ -98,6 +99,6 @@ int main(){
         EndDrawing();
        
     }
-    
+    UnloadTexture(background_color);
     CloseWindow();
 };
