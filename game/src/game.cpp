@@ -12,7 +12,7 @@ void levelbar(){
     DrawRectangle(1382,55,100,80 ,RED);
 }
 
-void game(SceneType& sceneState, bool* SpinnerEditMode,int* SpinnerValue, int value,int value1, int value2, int value3, int value4, int value5, int value6,int value7,int* sum){
+void game(SceneType& sceneState, bool* SpinnerEditMode,int* SpinnerValue){
 
     //positions
     Rectangle rec_lines = {300, 1080 - 200, 100,100};
@@ -55,22 +55,13 @@ void game(SceneType& sceneState, bool* SpinnerEditMode,int* SpinnerValue, int va
         *SpinnerEditMode = !*SpinnerEditMode;
     }
 
-
-
-    GuiValueBox(Rectangle {300, 1080-310, 80,80}, "", &value, 0, 1, false);
-    GuiValueBox(Rectangle {410, 1080-310, 80,80}, "", &value1, 0, 1, false);
-    GuiValueBox(Rectangle {520, 1080-310, 80,80}, "", &value2, 0, 1, false);
-    GuiValueBox(Rectangle {630, 1080-310, 80,80}, "", &value3, 0, 1, false);
-    GuiValueBox(Rectangle {740, 1080-310, 80,80}, "", &value4, 0, 1, false);
-    GuiValueBox(Rectangle {850, 1080-310, 80,80}, "", &value5, 0, 1, false);
-    GuiValueBox(Rectangle {960, 1080-310, 80,80}, "", &value6, 0, 1, false);
-    GuiValueBox(Rectangle {1070, 1080-310, 80,80}, "", &value7, 0, 1, false);
-    
+        
     levelbar();
 
     
     
 }
+
 void login(SceneType& sceneState, bool* UserBoxEditMode ,bool* PassBoxEditMode,char* UserBoxInput, char* PassBoxInput){
     string userId, password,id, pass; 
 
@@ -122,6 +113,7 @@ void login(SceneType& sceneState, bool* UserBoxEditMode ,bool* PassBoxEditMode,c
     if (count == 1){
         if(CheckCollisionPointRec(GetMousePosition(),(Rectangle){722,602, 500, 90})){
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                WaitTime(1);
                 sceneState = MAIN_MENU;
             }
         }
@@ -139,7 +131,7 @@ void reg(SceneType& sceneState,bool* RUserBoxEditMode ,bool* RPassBoxEditMode,ch
     DrawRectangle(722, 478, 500, 80, WHITE);
     
     if (GuiTextBox((Rectangle){ 722, 373, 500, 80 }, RUserBoxInput, 128, *RUserBoxEditMode)) *RUserBoxEditMode = !*RUserBoxEditMode;
-    if (GuiTextBox((Rectangle){ 722, 478, 500, 80 }, RPassBoxInput, 128, *RPassBoxEditMode)) *RPassBoxEditMode = !*RPassBoxEditMode;
+    if (GuiTextBox((Rectangle){ 722, 478, 500, 80 } ,RPassBoxInput, 128, *RPassBoxEditMode)) *RPassBoxEditMode = !*RPassBoxEditMode;
 
     userId = RUserBoxInput;
     password = RPassBoxInput;

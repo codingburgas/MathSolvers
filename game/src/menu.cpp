@@ -108,4 +108,3 @@ void aboutMenu(SceneType& sceneState){
         } 
         DrawTexture(menu_back, 777,935, WHITE);
     }
-
