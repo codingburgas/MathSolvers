@@ -1,7 +1,7 @@
 <h1 align="center">Team Math Solvers</h1>
 
 <p align="center">
-
+    <img src ="docs/banner.png"/>
 </p>
 
 ## 🧒 Our Team
@@ -14,7 +14,7 @@
 
 ## 💻 About
 <br>
-<b><p align="center">Our project presents a small game where you have to use your binary math skills to quickly solve as many puzzels as you can!</p></b>
+<b><p align="center">Our project presents a small game where you have to use your binary math skills to quickly solve as many puzzles as you can!</p></b>
 <br>
 
 ## 🗂️Our Technologies
@@ -48,7 +48,7 @@
 
 
 
-<a href="/docs/">QA Documentation </a>
+<a href="/docs/QA_documentation">QA Documentation </a>
 
 
 <a href="/docs/MathSolvers.docx">Team Documentation </a>
