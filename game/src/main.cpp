@@ -9,13 +9,12 @@ using namespace std;
 
 int main(){
     
-    SceneType currentScene = LOGIN_MENU;
+    SceneType currentScene = MAIN_MENU;
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
     InitWindow(screenWidth, screenHeight, "Math Solvers - Game");
-    //
-    bool SpinnerEditMode = false;
-    int SpinnerValue = 0;
+
+    SetExitKey(0);
     // login data base
 
     bool UserBoxEditMode = false;
@@ -28,6 +27,31 @@ int main(){
     char RPassBoxInput[128] = "";
     bool RUserBoxEditMode = false;
     char RUserBoxInput[128] = "";
+    //game 
+    int level = 0; 
+    int score = 0; 
+
+	int dec[10]{};
+    int binarySum = 0;
+    int remainTasks = 0;
+    int remainTasks1 = 0;
+    int binaryValue[8]= {0,0,0,0,0,0,0,0};
+
+    for (int i = 0; i < 10; i++){
+        dec[i] = GetRandomValue(0,255);
+    }
+    
+    int valueBox1 = 0;
+    int valueBox2 = 0;
+    int valueBox3 = 0;
+    int valueBox4 = 0;
+    int valueBox5 = 0;
+    int valueBox6 = 0;
+    int valueBox7 = 0;
+    int valueBox8 = 0;
+
+    Texture binaryZero = LoadTexture("../img/frames/buttons/binary0.png");
+    Texture binaryOne = LoadTexture("../img/frames/buttons/binary1.png");
 
     Texture2D background_color = LoadTexture("../img/frames/background.png");
 
@@ -45,17 +69,73 @@ int main(){
             reg(currentScene,&RUserBoxEditMode, &RPassBoxEditMode ,RUserBoxInput,RPassBoxInput);
             break;
         case MAIN_MENU:
+            if(IsKeyPressed(KEY_ESCAPE)){
+                currentScene = LOGIN_MENU;
+            }
             mainMenu(currentScene);
             break;
         case SECOND_MENU:
+            if(IsKeyPressed(KEY_ESCAPE)){
+                currentScene = MAIN_MENU;
+            }
             secondMenu(currentScene);
             break;
         case ABOUT_MENU:
+            if(IsKeyPressed(KEY_ESCAPE)){
+                currentScene = MAIN_MENU;
+            }
             aboutMenu(currentScene);
             break;
-
         case GAME_MENU:
-            game(currentScene,&SpinnerEditMode,&SpinnerValue);
+            if(IsKeyPressed(KEY_ESCAPE)){
+                currentScene = SECOND_MENU;
+            }
+            game(currentScene,dec,binaryValue,binarySum,&remainTasks,&remainTasks1,&valueBox1,&valueBox2,&valueBox3,&valueBox4,&valueBox5,&valueBox6,&valueBox7,&valueBox8);
+            if (valueBox1 == 1){
+                DrawTexture(binaryOne, 67,790, WHITE);
+            } else {
+                DrawTexture(binaryZero, 67,790, WHITE);
+            }
+            if (valueBox2 == 1){
+                DrawTexture(binaryOne, 207,790, WHITE);
+            } else {
+                DrawTexture(binaryZero, 207,790, WHITE);
+            }
+            if (valueBox3 == 1){
+                DrawTexture(binaryOne, 347,790, WHITE);
+            } else {
+                DrawTexture(binaryZero, 347,790, WHITE);
+            }
+            if (valueBox4 == 1){
+                DrawTexture(binaryOne, 487,790, WHITE);
+            } else {
+                DrawTexture(binaryZero, 487,790, WHITE);
+            }
+            if (valueBox5 == 1){
+                DrawTexture(binaryOne, 627,790, WHITE);
+            } else {
+                DrawTexture(binaryZero, 627,790, WHITE);
+            }
+            if (valueBox6 == 1){
+                DrawTexture(binaryOne, 767,790, WHITE);
+            } else {
+                DrawTexture(binaryZero, 767,790, WHITE);
+            }
+            if (valueBox7 == 1){
+                DrawTexture(binaryOne, 907,790, WHITE);
+            } else {
+                DrawTexture(binaryZero, 907,790, WHITE);
+            }
+            if (valueBox8 == 1){
+                DrawTexture(binaryOne, 1047,790, WHITE);
+            } else {
+                DrawTexture(binaryZero, 1047,790, WHITE);
+            }
+            levelbar(remainTasks,&level, &score);
+                if (remainTasks == 5){
+                    level += 1;
+                    remainTasks = 0;
+                }
             break;
         } 
 

@@ -7,61 +7,171 @@
 #include "raygui.h"
 using namespace std;
 
-void levelbar(){
-    DrawRectangle(1382,55,500,80 ,WHITE);
-    DrawRectangle(1382,55,100,80 ,RED);
+
+void levelbar(int completedTasks, int* level,int* score){
+    
+       
+
+    DrawRectangle(1047,54,450,83 ,WHITE);
+    
+    *score = 1000 * *level;
+    DrawText(TextFormat("%d", *level), 1791,80,50,BLACK);
+    DrawText(TextFormat("%d", *score), 1700,165,50,BLACK);
+    DrawRectangle(1047,54,(100 * completedTasks),80 ,RED);  
+    DrawText("Level Bar",1047,54,40,BLACK);
 }
 
-void game(SceneType& sceneState, bool* SpinnerEditMode,int* SpinnerValue){
+void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int* remainTasks,int* remainTasks1,int* valueBox1,int* valueBox2,int* valueBox3,int* valueBox4,int* valueBox5,int* valueBox6,int* valueBox7,int* valueBox8){
+    //rectangles pos
+    
+    Rectangle rectangle_pos = {1079, 791,100,91};
+    int text_y = 0;
 
-    //positions
-    Rectangle rec_lines = {300, 1080 - 200, 100,100};
-    Rectangle rec_lines1 = {300, 1080 - 200, 100,100};
-    Vector2 startPos = {300, 870};
-    Vector2 endPos = {1175, 870};
-    //structure
-    Color rec_text = CLITERAL(Color){ 3, 43, 67, 255 };
-    Color rec_text1 = CLITERAL(Color){ 63, 136, 197, 255 };
-    DrawRectangle(0,0,1920,1080,rec_text1);
-    DrawRectangle(100, 0, 1300, 1080, rec_text);
-    DrawRectangleRec(rec_lines, WHITE);
-    DrawRectangleLinesEx(rec_lines,3.0f, BLACK);    
-    //rectangles
-    Rectangle rec_pos = {300, 1080 - 330, 100, 100};
-    //color of the buttons
+    Texture valueBoxTexture = LoadTexture("../img/frames/buttons/128.png");
+    Texture valueBoxTexture1 = LoadTexture("../img/frames/buttons/64.png");
+    Texture valueBoxTexture2 = LoadTexture("../img/frames/buttons/32.png");
+    Texture valueBoxTexture3 = LoadTexture("../img/frames/buttons/16.png");
+    Texture valueBoxTexture4 = LoadTexture("../img/frames/buttons/8.png");
+    Texture valueBoxTexture5 = LoadTexture("../img/frames/buttons/4.png");
+    Texture valueBoxTexture6 = LoadTexture("../img/frames/buttons/2.png");
+    Texture valueBoxTexture7 = LoadTexture("../img/frames/buttons/1.png");
 
-    Rectangle rec_pos1 =  { 800, 360, 120, 24 };
-
-
-
-    for (int i = 0; i < 7; i++){
-        rec_lines.x += 110;
-        DrawRectangleRec(rec_lines, WHITE);
-        DrawRectangleLinesEx(rec_lines,3.0f, BLACK);
-    }
-    DrawText("128",350, 1080 - 175, 30, BLACK);
-    DrawText("64",460, 1080 - 175, 30, BLACK);
-    DrawText("32",570, 1080 - 175, 30, BLACK);
-    DrawText("16",680, 1080 - 175, 30, BLACK);
-    DrawText("8",790, 1080 - 175, 30, BLACK);
-    DrawText("4",900, 1080 - 175, 30, BLACK);
-    DrawText("2",1010, 1080 - 175, 30, BLACK);
-    DrawText("1",1120, 1080 - 175, 30, BLACK);
-    DrawLineBezier(startPos, endPos, 5.0f, WHITE);
-    GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
-    GuiSetStyle(DEFAULT, BORDER_COLOR_NORMAL, 0x904a888a );
-
-    if (GuiSpinner((Rectangle){ 1200, 1080- 300, 120, 60 }, "", SpinnerValue, 0, 255, *SpinnerEditMode)) {
-        *SpinnerEditMode = !*SpinnerEditMode;
-    }
+    Texture symEqual = LoadTexture("../img/frames/buttons/equal.png");
+    Texture valueSum = LoadTexture("../img/frames/buttons/sectionInput.png");
+    Texture scoreBoard = LoadTexture("../img/frames/buttons/border.png");
+    Texture timeRemaining = LoadTexture("../img/frames/buttons/timeremaining.png");
 
         
-    levelbar();
+       
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 67, 791, 96, 91 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                *valueBox1 = 1;
+                binaryValue[0] = 128;
+            }
+            else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+                *valueBox1 = 0;
+                binaryValue[0] = 0;
+            }
 
-    
+        }
+
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 207, 791, 96, 91 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                *valueBox2 = 1;
+                binaryValue[1] = 64;
+            }
+            else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+                *valueBox2 = 0;
+                binaryValue[1] = 0;
+            }
+
+        }
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 347, 791, 96, 91 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                *valueBox3 = 1;
+                binaryValue[2] = 32;
+            }
+            else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+                *valueBox3 = 0;
+                binaryValue[2] = 0;
+            }
+
+        }
+
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 487, 791, 96, 91 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                *valueBox4 = 1;
+                binaryValue[3] = 16;
+            }
+            else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+                *valueBox4 = 0;
+                binaryValue[3] = 0;
+                
+            }
+
+        }
+
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 627, 791, 96, 91 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                *valueBox5 = 1;
+                binaryValue[4] = 8;
+            }
+            else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+                *valueBox5 = 0;
+                binaryValue[4] = 0;
+            }
+
+        }
+
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 767, 791, 96, 91 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                *valueBox6 = 1;
+                binaryValue[5] = 4;
+                
+            }
+            else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+                *valueBox6 = 0;
+                binaryValue[5] = 0;
+            }
+
+        }
+ 
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 907, 791, 96, 91 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                *valueBox7 = 1;
+                binaryValue[6] = 2;
+            }
+            else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+                *valueBox7 = 0;
+                binaryValue[6] = 0;
+            }
+
+        }
+
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 1047, 791, 96, 91 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                *valueBox8 = 1;
+                binaryValue[7] = 1;
+            }
+            else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+                *valueBox8 = 0;
+                binaryValue[7] = 0;
+            }
+
+        }
+
+
+         for (int i = 0; i < 8; i++){
+                binarySum += binaryValue[i];  
+                
+            }          
+                
+        DrawTexture(valueBoxTexture,67,897,WHITE);
+        DrawTexture(valueBoxTexture1,207,897,WHITE);
+        DrawTexture(valueBoxTexture2,347,897,WHITE);
+        DrawTexture(valueBoxTexture3,487,897,WHITE);
+        DrawTexture(valueBoxTexture4,627 ,897,WHITE);
+        DrawTexture(valueBoxTexture5,766 ,897,WHITE);
+        DrawTexture(valueBoxTexture6,906 ,897,WHITE);
+        DrawTexture(valueBoxTexture7,1047,897,WHITE);
+        DrawTexture(symEqual,1204,827,WHITE);
+        DrawTexture(valueSum,1280,790,WHITE);
+        DrawTexture(scoreBoard,1525,54,WHITE);
+        DrawTexture(timeRemaining,380,342 ,WHITE);
+        DrawText(TextFormat("%d", binarySum), 1362, 900,50,RED);  
+        
+        for(int i = 0; i < 1; i++){
+            DrawText(TextFormat("%d", dec[i]), 1350, 808 - text_y,50,WHITE);
+            text_y += 112;        
+        }
+        if (binarySum == dec[0]){
+                    dec[0] = GetRandomValue(0,255);
+                    *remainTasks += 1;
+                    
+        }
+           
     
 }
-
 void login(SceneType& sceneState, bool* UserBoxEditMode ,bool* PassBoxEditMode,char* UserBoxInput, char* PassBoxInput){
     string userId, password,id, pass; 
 
@@ -87,6 +197,7 @@ void login(SceneType& sceneState, bool* UserBoxEditMode ,bool* PassBoxEditMode,c
     }
 
     if (GuiTextBox((Rectangle){ 722, 478, 500, 80 }, PassBoxInput, 128, *PassBoxEditMode)){
+            
             *PassBoxEditMode = !*PassBoxEditMode;
         
     }
@@ -113,14 +224,13 @@ void login(SceneType& sceneState, bool* UserBoxEditMode ,bool* PassBoxEditMode,c
     if (count == 1){
         if(CheckCollisionPointRec(GetMousePosition(),(Rectangle){722,602, 500, 90})){
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                WaitTime(1);
                 sceneState = MAIN_MENU;
             }
         }
     } 
 }
 void reg(SceneType& sceneState,bool* RUserBoxEditMode ,bool* RPassBoxEditMode,char* RUserBoxInput ,char* RPassBoxInput){
-    string userId, password, id, pass;
+    string userId, password;
     
     DrawRectangle(622,140,700,800, GRAY);
     DrawText("REGISTER", 852,246,50, WHITE);

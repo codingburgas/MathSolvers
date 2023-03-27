@@ -38,7 +38,7 @@ void mainMenu(SceneType& sceneState){
             CloseWindow();
         }
     } 
-        DrawTexture(game_title,485,286,WHITE); 
+        DrawTexture(game_title,562 ,269 ,WHITE); 
 
             // Draw rectangles
         DrawTexture(menu_game, 777 ,537 , WHITE);
@@ -58,7 +58,7 @@ void secondMenu(SceneType& sceneState){
 
     bool nextScene = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 
-    DrawTexture(game_title,485,286,WHITE); 
+    DrawTexture(game_title,562 ,269,WHITE); 
 
     // Draw rectangles
         if(IsKeyPressed (KEY_C)){
@@ -90,7 +90,7 @@ void aboutMenu(SceneType& sceneState){
     Texture2D menu_back = LoadTexture("../img/frames/buttons/back.png");
     //color for the button
     Texture2D game_title = LoadTexture("../img/frames/mathsolvers.png");
-    DrawTexture(game_title,485,86,WHITE); 
+    DrawTexture(game_title,562,86,WHITE); 
 
     //fonts
 
