@@ -48,13 +48,13 @@
 
 
 
-<a href="/docs/QA_documentation">QA Documentation </a>
+<a href="/docs/QA_documentation.xlsx">QA Documentation </a>
 
 
-<a href="/docs/MathSolvers.docx">Team Documentation </a>
+<a href="/docs/MathSolvers_Documentation.docx">Team Documentation </a>
 
 
-<a href="/docs/Math_Solvers.pptx">Presentation </a>
+<a href="/docs/MathSolvers.pptx">Presentation </a>
 
 
 <a href="/docs/MathSolvers_testplan.docx">Test Plan </a>
