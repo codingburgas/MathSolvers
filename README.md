@@ -14,8 +14,7 @@
 
 ## 💻 About
 <br>
-<b><p align="center">
-</p></b>
+<b><p align="center">Our project presents a small game where you have to use your binary math skills to quickly solve as many puzzels as you can!</p></b>
 <br>
 
 ## 🗂️Our Technologies
@@ -49,16 +48,16 @@
 
 
 
-<a href="#">QA Documentation </a>
+<a href="/docs/">QA Documentation </a>
 
 
-<a href="#">Team Documentation </a>
+<a href="/docs/MathSolvers.docx">Team Documentation </a>
 
 
-<a href="#">Presentation </a>
+<a href="/docs/Math_Solvers.pptx">Presentation </a>
 
 
-<a href="#">Test Plan </a>
+<a href="/docs/MathSolvers_testplan.docx">Test Plan </a>
 
 <hr>
 
