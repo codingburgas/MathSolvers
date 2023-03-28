@@ -21,7 +21,7 @@ void levelbar(int completedTasks, int* level,int* score){
     DrawText("Level Bar",1047,54,40,BLACK);
 }
 
-void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int* remainTasks,int* remainTasks1,int* valueBox1,int* valueBox2,int* valueBox3,int* valueBox4,int* valueBox5,int* valueBox6,int* valueBox7,int* valueBox8){
+void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int* remainTasks,int* remainTasks1,int* valueBox1,int* valueBox2,int* valueBox3,int* valueBox4,int* valueBox5,int* valueBox6,int* valueBox7,int* valueBox8,float* problemTimer, int problemTimer_x,int level){
     //rectangles pos
     
     Rectangle rectangle_pos = {1079, 791,100,91};
@@ -40,6 +40,8 @@ void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int*
     Texture valueSum = LoadTexture("../img/frames/buttons/sectionInput.png");
     Texture scoreBoard = LoadTexture("../img/frames/buttons/border.png");
     Texture timeRemaining = LoadTexture("../img/frames/buttons/timeremaining.png");
+
+    Texture2D exit_button = LoadTexture("../img/frames/exit_game.png");
 
         
        
@@ -139,7 +141,11 @@ void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int*
             }
 
         }
-
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){ 1540 , 906, 309, 93 })){
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                sceneState = SECOND_MENU;
+            }
+        }
 
          for (int i = 0; i < 8; i++){
                 binarySum += binaryValue[i];  
@@ -158,6 +164,7 @@ void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int*
         DrawTexture(valueSum,1280,790,WHITE);
         DrawTexture(scoreBoard,1525,54,WHITE);
         DrawTexture(timeRemaining,380,342 ,WHITE);
+        DrawTexture(exit_button,1540,906 ,WHITE);
         DrawText(TextFormat("%d", binarySum), 1362, 900,50,RED);  
         
         for(int i = 0; i < 1; i++){
@@ -165,13 +172,97 @@ void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int*
             text_y += 112;        
         }
         if (binarySum == dec[0]){
-                    dec[0] = GetRandomValue(0,255);
-                    *remainTasks += 1;
+                *problemTimer = 20 - 2* level;
+            
+                dec[0] = GetRandomValue(0,255);
+                *remainTasks += 1;
                     
         }
+
+        if (*problemTimer <= 0)
+        {
+            sceneState = LOST_MENU;
+        }
+        else
+        {
+            if(*problemTimer <= 9){
+                problemTimer_x = 40;
+            }
+            DrawText(TextFormat("%.0f", *problemTimer),560 + problemTimer_x,410, 160, BLACK);
+        }
+        if (level == 10){
+            sceneState = WON_MENU;
+        }
            
-    
+
 }
+void lostMenu(SceneType& sceneState,float* problemTimer,int level){
+    Texture2D menu_back = LoadTexture("../img/frames/buttons/lost_exit.png");
+    Texture2D menu_again = LoadTexture("../img/frames/buttons/playagain.png");
+    //color for the button
+
+    //fonts
+
+    bool nextScene = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    
+        if(IsKeyPressed (KEY_C)){
+            ToggleFullscreen();
+        }
+
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){711,797,458,119})){
+            menu_back = LoadTexture("../img/frames/buttons/lost_exit.png");
+            if(nextScene){
+                sceneState = SECOND_MENU;
+            }
+        } 
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){711,608,458,119})){
+            menu_again = LoadTexture("../img/frames/buttons/playagain.hovered.png");
+            if(nextScene){
+                sceneState = GAME_MENU;
+            }
+        } 
+        DrawTexture(menu_again, 711,608 , WHITE);
+        DrawTexture(menu_back, 711,797 , WHITE);
+        DrawText("You Lost", 764,260 , 100, BLACK);
+        level = 0;
+        *problemTimer = 20 - 2* level;
+        
+        
+    }
+void wonMenu(SceneType& sceneState,float* problemTimer,int level){
+    Texture2D menu_back = LoadTexture("../img/frames/buttons/lost_exit.png");
+    Texture2D menu_again = LoadTexture("../img/frames/buttons/playagain.png");
+    //color for the button
+
+    //fonts
+
+    bool nextScene = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    
+        if(IsKeyPressed (KEY_C)){
+            ToggleFullscreen();
+        }
+
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){711,797,458,119})){
+            menu_back = LoadTexture("../img/frames/buttons/lost_exit.png");
+            if(nextScene){
+                sceneState = SECOND_MENU;
+            }
+        } 
+        if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){711,608,458,119})){
+            menu_again = LoadTexture("../img/frames/buttons/playagain.hovered.png");
+            if(nextScene){
+                sceneState = GAME_MENU;
+            }
+        } 
+        DrawTexture(menu_again, 711,608 , WHITE);
+        DrawTexture(menu_back, 711,797 , WHITE);
+        DrawText("You Won", 764,260 , 100, BLACK);
+        level = 0;
+        *problemTimer = 20 - 2* level;
+        
+        
+    }
+
 void login(SceneType& sceneState, bool* UserBoxEditMode ,bool* PassBoxEditMode,char* UserBoxInput, char* PassBoxInput){
     string userId, password,id, pass; 
 

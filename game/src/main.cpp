@@ -21,7 +21,7 @@ int main(){
     char UserBoxInput[128] = "";
     bool PassBoxEditMode = false; 
     char PassBoxInput[128] = "";
-
+    //sound
     // register date base
     bool RPassBoxEditMode = false;
     char RPassBoxInput[128] = "";
@@ -30,17 +30,21 @@ int main(){
     //game 
     int level = 0; 
     int score = 0; 
+    //timer
+    float problemTimer = 20 - 2* level;
+    int problemTimer_x = 0;
 
 	int dec[10]{};
+    // binary Sum
     int binarySum = 0;
     int remainTasks = 0;
     int remainTasks1 = 0;
     int binaryValue[8]= {0,0,0,0,0,0,0,0};
-
+    // random sum
     for (int i = 0; i < 10; i++){
         dec[i] = GetRandomValue(0,255);
     }
-    
+    // ValueBOxes input
     int valueBox1 = 0;
     int valueBox2 = 0;
     int valueBox3 = 0;
@@ -57,6 +61,10 @@ int main(){
 
     while (!WindowShouldClose())
     {
+            if (problemTimer > 0)
+                problemTimer -= GetFrameTime();
+
+            if (problemTimer < 0) problemTimer = 0;
         BeginDrawing();
         DrawTexture(background_color,0,0,WHITE);
         
@@ -69,7 +77,7 @@ int main(){
             reg(currentScene,&RUserBoxEditMode, &RPassBoxEditMode ,RUserBoxInput,RPassBoxInput);
             break;
         case MAIN_MENU:
-            if(IsKeyPressed(KEY_ESCAPE)){
+            if(IsKeyPressed(KEY_F11)){
                 currentScene = LOGIN_MENU;
             }
             mainMenu(currentScene);
@@ -86,11 +94,22 @@ int main(){
             }
             aboutMenu(currentScene);
             break;
-        case GAME_MENU:
+        case HELP_MENU:
             if(IsKeyPressed(KEY_ESCAPE)){
-                currentScene = SECOND_MENU;
+                currentScene = MAIN_MENU;
             }
-            game(currentScene,dec,binaryValue,binarySum,&remainTasks,&remainTasks1,&valueBox1,&valueBox2,&valueBox3,&valueBox4,&valueBox5,&valueBox6,&valueBox7,&valueBox8);
+            helpMenu(currentScene);
+            break;
+        case LOST_MENU:
+            level = 0;
+            lostMenu(currentScene,&problemTimer,level);
+            break;
+        case WON_MENU:
+            level = 0;
+            wonMenu(currentScene,&problemTimer,level);
+            break;
+        case GAME_MENU:
+            game(currentScene,dec,binaryValue,binarySum,&remainTasks,&remainTasks1,&valueBox1,&valueBox2,&valueBox3,&valueBox4,&valueBox5,&valueBox6,&valueBox7,&valueBox8,&problemTimer,problemTimer_x,level);
             if (valueBox1 == 1){
                 DrawTexture(binaryOne, 67,790, WHITE);
             } else {
@@ -135,13 +154,13 @@ int main(){
                 if (remainTasks == 5){
                     level += 1;
                     remainTasks = 0;
-                }
+                }            
             break;
         } 
 
         EndDrawing();
        
     }
-    UnloadTexture(background_color);
+
     CloseWindow();
 };
