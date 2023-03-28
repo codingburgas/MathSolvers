@@ -86,7 +86,7 @@ int main(){
             if(IsKeyPressed(KEY_ESCAPE)){
                 currentScene = MAIN_MENU;
             }
-            secondMenu(currentScene);
+            secondMenu(currentScene,&problemTimer,level);
             break;
         case ABOUT_MENU:
             if(IsKeyPressed(KEY_ESCAPE)){

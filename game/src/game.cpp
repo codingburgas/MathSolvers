@@ -23,10 +23,9 @@ void levelbar(int completedTasks, int* level,int* score){
 
 void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int* remainTasks,int* remainTasks1,int* valueBox1,int* valueBox2,int* valueBox3,int* valueBox4,int* valueBox5,int* valueBox6,int* valueBox7,int* valueBox8,float* problemTimer, int problemTimer_x,int level){
     //rectangles pos
-    
     Rectangle rectangle_pos = {1079, 791,100,91};
     int text_y = 0;
-
+    
     Texture valueBoxTexture = LoadTexture("../img/frames/buttons/128.png");
     Texture valueBoxTexture1 = LoadTexture("../img/frames/buttons/64.png");
     Texture valueBoxTexture2 = LoadTexture("../img/frames/buttons/32.png");
