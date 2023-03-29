@@ -31,16 +31,14 @@ int main(){
     int level = 0; 
     int score = 0; 
     //timer
-    float problemTimer = 20 - 2* level;
+    float problemTimer = 30 - 2* level;
     int problemTimer_x = 0;
 
 	int dec[10]{};
     // binary Sum
     int binarySum = 0;
     int remainTasks = 0;
-    int remainTasks1 = 0;
     int binaryValue[8]= {0,0,0,0,0,0,0,0};
-    // random sum
     for (int i = 0; i < 10; i++){
         dec[i] = GetRandomValue(0,255);
     }
@@ -60,33 +58,38 @@ int main(){
     Texture2D background_color = LoadTexture("../img/frames/background.png");
 
     while (!WindowShouldClose())
-    {
+    {            
             if (problemTimer > 0)
                 problemTimer -= GetFrameTime();
 
             if (problemTimer < 0) problemTimer = 0;
         BeginDrawing();
         DrawTexture(background_color,0,0,WHITE);
-        
         switch (currentScene)
         {
         case LOGIN_MENU:
+            remainTasks = 0;
+            level = 0;
             login(currentScene, &UserBoxEditMode ,&PassBoxEditMode, UserBoxInput, PassBoxInput);
             break;
         case REGISTER_MENU:
             reg(currentScene,&RUserBoxEditMode, &RPassBoxEditMode ,RUserBoxInput,RPassBoxInput);
             break;
         case MAIN_MENU:
+            remainTasks = 0;
+            level = 0;
             if(IsKeyPressed(KEY_F11)){
                 currentScene = LOGIN_MENU;
             }
             mainMenu(currentScene);
             break;
         case SECOND_MENU:
+            remainTasks = 0;
+            level = 0;
             if(IsKeyPressed(KEY_ESCAPE)){
                 currentScene = MAIN_MENU;
             }
-            secondMenu(currentScene);
+            secondMenu(currentScene,&problemTimer,level);
             break;
         case ABOUT_MENU:
             if(IsKeyPressed(KEY_ESCAPE)){
@@ -101,18 +104,20 @@ int main(){
             helpMenu(currentScene);
             break;
         case LOST_MENU:
+            remainTasks = 0;
             level = 0;
             lostMenu(currentScene,&problemTimer,level);
             break;
         case WON_MENU:
+            remainTasks = 0;
             level = 0;
             wonMenu(currentScene,&problemTimer,level);
             break;
         case GAME_MENU:
-            game(currentScene,dec,binaryValue,binarySum,&remainTasks,&remainTasks1,&valueBox1,&valueBox2,&valueBox3,&valueBox4,&valueBox5,&valueBox6,&valueBox7,&valueBox8,&problemTimer,problemTimer_x,level);
+            game(currentScene,dec,binaryValue,binarySum,&remainTasks,&valueBox1,&valueBox2,&valueBox3,&valueBox4,&valueBox5,&valueBox6,&valueBox7,&valueBox8,&problemTimer,problemTimer_x,level);
             if (valueBox1 == 1){
                 DrawTexture(binaryOne, 67,790, WHITE);
-            } else {
+            } else{
                 DrawTexture(binaryZero, 67,790, WHITE);
             }
             if (valueBox2 == 1){

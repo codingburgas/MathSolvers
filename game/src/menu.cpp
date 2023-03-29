@@ -47,7 +47,7 @@ void mainMenu(SceneType& sceneState){
 
 }   
 
-void secondMenu(SceneType& sceneState){
+void secondMenu(SceneType& sceneState,float* problemTimer, int level){
     
     Texture2D menu_game = LoadTexture("../img/frames/buttons/game.png");
     Texture2D menu_help = LoadTexture("../img/frames/buttons/help.png");
@@ -67,6 +67,7 @@ void secondMenu(SceneType& sceneState){
         if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){711 ,519,458,119})){
             menu_game = LoadTexture("../img/frames/buttons/game_hovered.png");
             if (nextScene){
+                *problemTimer = 30 - 2* level;
                 sceneState = GAME_MENU;
             }
         } 

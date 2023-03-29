@@ -18,6 +18,6 @@ enum SceneType
 };
 
 void mainMenu(SceneType& sceneState);
-void secondMenu(SceneType& sceneState);
+void secondMenu(SceneType& sceneState,float* problemTimer,int level);
 void aboutMenu(SceneType& sceneState);
 void helpMenu(SceneType& sceneState);

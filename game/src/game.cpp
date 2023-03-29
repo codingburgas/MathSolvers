@@ -8,20 +8,17 @@
 using namespace std;
 
 
-void levelbar(int completedTasks, int* level,int* score){
-    
-       
-
+void levelbar(int remainTasks, int* level,int* score){
     DrawRectangle(1047,54,450,83 ,WHITE);
     
     *score = 1000 * *level;
     DrawText(TextFormat("%d", *level), 1791,80,50,BLACK);
     DrawText(TextFormat("%d", *score), 1700,165,50,BLACK);
-    DrawRectangle(1047,54,(100 * completedTasks),80 ,RED);  
+    DrawRectangle(1047,54,(100 * remainTasks),80 ,RED);  
     DrawText("Level Bar",1047,54,40,BLACK);
 }
 
-void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int* remainTasks,int* remainTasks1,int* valueBox1,int* valueBox2,int* valueBox3,int* valueBox4,int* valueBox5,int* valueBox6,int* valueBox7,int* valueBox8,float* problemTimer, int problemTimer_x,int level){
+void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int* remainTasks,int* valueBox1,int* valueBox2,int* valueBox3,int* valueBox4,int* valueBox5,int* valueBox6,int* valueBox7,int* valueBox8,float* problemTimer, int problemTimer_x,int level){
     //rectangles pos
     
     Rectangle rectangle_pos = {1079, 791,100,91};
@@ -172,7 +169,7 @@ void game(SceneType& sceneState,int dec[8],int binaryValue[7],int binarySum,int*
             text_y += 112;        
         }
         if (binarySum == dec[0]){
-                *problemTimer = 20 - 2* level;
+                *problemTimer = 30 - 2* level;
             
                 dec[0] = GetRandomValue(0,255);
                 *remainTasks += 1;
@@ -225,7 +222,7 @@ void lostMenu(SceneType& sceneState,float* problemTimer,int level){
         DrawTexture(menu_back, 711,797 , WHITE);
         DrawText("You Lost", 764,260 , 100, BLACK);
         level = 0;
-        *problemTimer = 20 - 2* level;
+        *problemTimer = 30 - 2* level;
         
         
     }
@@ -258,7 +255,7 @@ void wonMenu(SceneType& sceneState,float* problemTimer,int level){
         DrawTexture(menu_back, 711,797 , WHITE);
         DrawText("You Won", 764,260 , 100, BLACK);
         level = 0;
-        *problemTimer = 20 - 2* level;
+        *problemTimer = 30 - 2* level;
         
         
     }
