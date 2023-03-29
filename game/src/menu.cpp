@@ -67,11 +67,8 @@ void secondMenu(SceneType& sceneState,float* problemTimer, int level){
         if (CheckCollisionPointRec(GetMousePosition(),(Rectangle){711 ,519,458,119})){
             menu_game = LoadTexture("../img/frames/buttons/game_hovered.png");
             if (nextScene){
-<<<<<<< HEAD
                 *problemTimer = 30 - 2* level;
-=======
-                *problemTimer = 20 - 2* level;
->>>>>>> 05cd5c9a70eb52e1a3b3c957c4bdb3a5ada06735
+
                 sceneState = GAME_MENU;
             }
         } 
